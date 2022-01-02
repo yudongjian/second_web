@@ -8,3 +8,7 @@ def index(request):
     data = models.Food.objects.filter()
     print(data)
     return render(request, 'index.html', {'data': data})
+
+
+def add_food(request):
+    pass
