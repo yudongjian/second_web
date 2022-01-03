@@ -7,7 +7,7 @@ from app1 import models
 def index(request):
     data = models.Food.objects.filter()
     print(data)
-    return render(request, 'index.html', {'data': data})
+    return render(request, 'index2.html', {'data': data})
 
 
 def add_food(request):
