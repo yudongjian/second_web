@@ -10,5 +10,5 @@ def index(request):
     return render(request, 'index2.html', {'data': data})
 
 
-def add_food(request):
-    pass
+def show(request):
+    return render(request, 'show.html')
