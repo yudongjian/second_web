@@ -108,8 +108,8 @@
     <form id="form1" method="post" action="/doregister/">
         {% csrf_token %}
         <p><label class="label_input">用户名</label><input type="text" name="username" class="text_field"/></p>
-        <p><label class="label_input">密码</label><input type="password" pwd1="password" class="text_field"/></p>
-        <p><label class="label_input">确认密码</label><input type="password" pwd2="password" class="text_field"/></p>
+        <p><label class="label_input">密码</label><input type="password" name="pwd1" class="text_field"/></p>
+        <p><label class="label_input">确认密码</label><input type="password" name="pwd2" class="text_field"/></p>
 
         <div id="login_control">
             <input type="submit"  value="注册" >

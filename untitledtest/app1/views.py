@@ -9,11 +9,6 @@ import logging
 import time
 
 
-# login windows
-def login(request):
-    return render(request, 'login.html')
-
-
 # register windows
 def register(request):
     return render(request, 'register.html')
@@ -26,7 +21,7 @@ def doregister(request):
     name = request.POST.get('username')
     salt = str(random.randint(111111, 999999))
     md5_pwd = fun_package.get_self_md5(salt, pwd)
-    print('pwd:', pwd)
+    print('pwd:'+ pwd)
     print('register salt:' + salt)
     print('register md5_pwd:' + md5_pwd)
     try:
@@ -38,13 +33,18 @@ def doregister(request):
             status=1
         )
         # return render(request, 'login.html', {'info': '插入成功'})
-        time.sleep(20)
         return redirect(reverse('login'))
 
     except Exception as err:
         print(err)
+        print('==============异常===============')
         # return render(request, 'register.html', {'info': '插入失败'}
         return redirect(reverse('register'))
+
+
+# login windows
+def login(request):
+    return render(request, 'login.html')
 
 
 # deal with login
@@ -65,7 +65,7 @@ def dologin(request):
             request.session['adminuser'] = '123456789'
             return redirect(reverse('index'))
     print('账号密码错误')
-    return redirect(reverse('login'))
+    return redirect(reverse('login'), {'name': user.nickname})
 
 
 # main page
