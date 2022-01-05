@@ -19,5 +19,13 @@ from app1 import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    # login
+    path('login/', views.login, name='login'),
+    path('dologin/', views.dologin, name='dologin'),
+    # register
+    path('register/', views.register, name='register'),
+    path('doregister/', views.doregister, name='doregister'),
+
     path('show', views.show, name='show'),
+    path('show/<int:page_index>', views.show, name='show'),
 ]

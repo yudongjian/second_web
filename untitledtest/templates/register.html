@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+
+<!--    <link rel="stylesheet" type="text/css" href="login.css"/>-->
+<!--    <script type="text/javascript" src="login.js"></script>-->
+</head>
+<style>
+    body {
+        background-image: url("{% static '/index/dist/img/photo1.png' %}");;
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+
+    #login_frame {
+        width: 400px;
+        height: 260px;
+        padding: 13px;
+
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -200px;
+        margin-top: -200px;
+
+        background-color: rgba(240, 255, 255, 0.5);
+
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    form p > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    #image_logo {
+        margin-top: 22px;
+    }
+
+    .label_input {
+        font-size: 14px;
+        font-family: 宋体;
+
+        width: 65px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+
+        color: white;
+        background-color: #3CD8FF;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+    .text_field {
+        width: 278px;
+        height: 28px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border: 0;
+    }
+
+    #btn_login {
+        font-size: 14px;
+        font-family: 宋体;
+
+        width: 120px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+
+        color: white;
+        background-color: #3BD9FF;
+        border-radius: 6px;
+        border: 0;
+
+        float: left;
+    }
+
+    #forget_pwd {
+        font-size: 12px;
+        color: white;
+        text-decoration: none;
+        position: relative;
+        float: right;
+        top: 5px;
+
+    }
+
+    #forget_pwd:hover {
+        color: blue;
+        text-decoration: underline;
+    }
+
+    #login_control {
+        padding: 0 28px;
+    }
+    </style>
+<body>
+<div id="login_frame">
+
+<!--    <p id="image_logo"><img src="{% static '/index/dist/img/login.png' %}" style="height: 40px; width: 40px"></p>-->
+    {{ info }}
+    <form id="form1" method="post" action="/doregister/">
+        {% csrf_token %}
+        <p><label class="label_input">用户名</label><input type="text" name="username" class="text_field"/></p>
+        <p><label class="label_input">密码</label><input type="password" pwd1="password" class="text_field"/></p>
+        <p><label class="label_input">确认密码</label><input type="password" pwd2="password" class="text_field"/></p>
+
+        <div id="login_control">
+            <input type="submit"  value="注册" >
+            <a id="forget_pwd" href="#">忘记密码？</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
