@@ -110,7 +110,8 @@
         {% csrf_token %}
         <p><label class="label_input">用户名</label><input type="text" name="username" class="text_field"/></p>
         <p><label class="label_input">密码</label><input type="password" name="password" class="text_field"/></p>
-
+        <input type="text" style="width: 80px" name="code" 验证码>
+        <br><br>
         <div id="login_control">
             <input type="submit"  value="登录" />
             <a href="{% url 'register' %}">注册</a>
