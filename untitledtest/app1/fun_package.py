@@ -11,3 +11,4 @@ def get_self_md5(str2, salt):
     m = hashlib.md5(s.encode())  # md5加密
     return m.hexdigest()  # 返回密文
 
+

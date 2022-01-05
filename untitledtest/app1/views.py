@@ -4,7 +4,9 @@ from django.core.paginator import Paginator
 from django.urls import reverse
 from django.shortcuts import redirect
 import random
-from . import mymd5
+from . import fun_package
+import logging
+import time
 
 
 # login windows
@@ -22,28 +24,48 @@ def doregister(request):
 
     pwd = request.POST.get('pwd1')
     name = request.POST.get('username')
-    salt = random.randint(111111, 999999)
-    pwd_salt = mymd5.get_self_md5(salt, pwd)
+    salt = str(random.randint(111111, 999999))
+    md5_pwd = fun_package.get_self_md5(salt, pwd)
+    print('pwd:', pwd)
+    print('register salt:' + salt)
+    print('register md5_pwd:' + md5_pwd)
     try:
         models.User.objects.create(
             username=name,
             nickname='小华',
-            password_hash=pwd_salt,
+            password_hash=md5_pwd,
             password_salt=salt,
             status=1
         )
-        return render(request, 'login.html', {'info': '插入成功'})
+        # return render(request, 'login.html', {'info': '插入成功'})
+        time.sleep(20)
+        return redirect(reverse('login'))
+
     except Exception as err:
         print(err)
-        return render(request, 'register.html', {'info': '插入失败'})
+        # return render(request, 'register.html', {'info': '插入失败'}
+        return redirect(reverse('register'))
 
 
 # deal with login
 def dologin(request):
     name = request.POST.get('username')
     pwd = request.POST.get('password')
-    request.session['adminuser'] = '123456789'
-    return redirect(reverse('index'))
+    print('name:', name)
+    print('pwd:', pwd)
+    user = models.User.objects.get(username=name)
+    # if user exist.
+    # input password comparison with database password
+    if user:
+        input_pwd = fun_package.get_self_md5(user.password_salt, pwd)
+        print('input pwd:', pwd)
+        print('ipput salt pwd:', input_pwd)
+        print('user.password_hash:', user.password_hash)
+        if input_pwd == user.password_hash:
+            request.session['adminuser'] = '123456789'
+            return redirect(reverse('index'))
+    print('账号密码错误')
+    return redirect(reverse('login'))
 
 
 # main page
