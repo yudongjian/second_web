@@ -178,6 +178,7 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ name }}</a>
+          {{ name }}
         </div>
       </div>
 
@@ -210,7 +211,7 @@
               <li class="nav-item">
                 <a href="{% url 'show' 1 %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p> 展示数据</p>
+                  <p> 展示数据 {{ name }}</p>
                 </a>
               </li>
               <li class="nav-item">

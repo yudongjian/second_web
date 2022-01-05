@@ -26,8 +26,8 @@ def get_verify_code():
         code_str += code_list[randint(0, 62)]
     image = ImageCaptcha().generate_image(code_str)
 
-
     buf = io.BytesIO()
     # 将图片保存在内存中，文件类型为png
     image.save(buf, 'png')
-    return code_str
+    return buf.getvalue(), 'image/png'
+

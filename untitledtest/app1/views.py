@@ -36,8 +36,6 @@ def doregister(request):
         return redirect(reverse('login'))
 
     except Exception as err:
-        print(err)
-        print('==============异常===============')
         # return render(request, 'register.html', {'info': '插入失败'}
         return redirect(reverse('register'))
 
@@ -53,7 +51,11 @@ def dologin(request):
     pwd = request.POST.get('password')
     print('name:', name)
     print('pwd:', pwd)
-    user = models.User.objects.get(username=name)
+    try:
+        user = models.User.objects.get(username=name)
+    except Exception as err:
+        print('账号密码错误')
+        return redirect(reverse('login'))
     # if user exist.
     # input password comparison with database password
     if user:
@@ -63,9 +65,9 @@ def dologin(request):
         print('user.password_hash:', user.password_hash)
         if input_pwd == user.password_hash:
             request.session['adminuser'] = '123456789'
-            return redirect(reverse('index'))
+            return redirect(reverse('index'),)
     print('账号密码错误')
-    return redirect(reverse('login'), {'name': user.nickname})
+    return render(request, 'login.html', {'info': '账号或密码错误'})
 
 
 # main page
