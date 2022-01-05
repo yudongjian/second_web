@@ -48,7 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'app1.login_middleware.login_middleware',
+    # 'app1.login_middleware.login_middleware',
 ]
 
 ROOT_URLCONF = 'untitledtest.urls'
@@ -131,3 +131,6 @@ print(STATICFILES_DIRS)
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LOGIN_URL='/login'

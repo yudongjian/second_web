@@ -58,7 +58,7 @@
                     <ul class="pagination pagination-sm m-0 float-right">
                       <li class="page-item"><a class="page-link" href="{% url 'show' page_index|add:-1 %}">«</a></li>
                       {% for p in page_values %}
-                            <li {% if p == page_index %}class="active"{% endif %}class="page-item"><a class="page-link" href="#">{{ p }}</a></li>
+                            <li {% if p == page_index %}class="active"{% endif %}class="page-item"><a class="page-link" href="{% url 'show' p %}">{{ p }}</a></li>
                       {% endfor %}
                       <li class="page-item"><a class="page-link" href="{% url 'show' page_index|add:1 %}">»</a></li>
 

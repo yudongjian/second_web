@@ -3,6 +3,7 @@ from app1 import models
 from django.core.paginator import Paginator
 from django.urls import reverse
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 import random
 from . import fun_package
 import logging
@@ -64,13 +65,15 @@ def dologin(request):
         print('ipput salt pwd:', input_pwd)
         print('user.password_hash:', user.password_hash)
         if input_pwd == user.password_hash:
-            request.session['adminuser'] = '123456789'
+            request.user.is_authenticated = True
+            request.session['adminuser'] = user.nickname
             return redirect(reverse('index'),)
     print('账号密码错误')
     return render(request, 'login.html', {'info': '账号或密码错误'})
 
 
 # main page
+@login_required
 def index(request):
     return render(request, 'index2.html')
 

@@ -177,8 +177,8 @@
           <img src="{% static '/index/dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ name }}</a>
-          {{ name }}
+          <a href="#" class="d-block"></a>
+          {{ request.session.adminuser }}
         </div>
       </div>
 
@@ -211,11 +211,11 @@
               <li class="nav-item">
                 <a href="{% url 'show' 1 %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p> 展示数据 {{ name }}</p>
+                  <p> 展示数据</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="#" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>仪表盘 v2</p>
                 </a>
