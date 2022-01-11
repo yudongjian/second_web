@@ -27,5 +27,6 @@ urlpatterns = [
     path('doregister/', views.doregister, name='doregister'),
 
     path('show', views.show, name='show'),
+    path('add_data', views.add_data, name='add_data'),
     path('show/<int:page_index>', views.show, name='show'),
 ]

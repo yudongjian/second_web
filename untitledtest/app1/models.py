@@ -12,6 +12,16 @@ class User(models.Model):
     create_at = models.DateTimeField(default=datetime.now)    # 创建时间
     update_at = models.DateTimeField(default=datetime.now)    # 修改时间
 
+    def toDict(self):
+        return {
+                'username': self.username,
+                'nickaname': self.nickname
+
+                }
+
+    def __str__(self):
+        return '%s-%s-%s-%s'%(self.username, self.nickname, self.password_salt, self.status)
+
 
 class Food(models.Model):
     # id = models.AutoField()

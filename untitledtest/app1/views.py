@@ -65,15 +65,14 @@ def dologin(request):
         print('ipput salt pwd:', input_pwd)
         print('user.password_hash:', user.password_hash)
         if input_pwd == user.password_hash:
-            request.user.is_authenticated = True
             request.session['adminuser'] = user.nickname
-            return redirect(reverse('index'),)
+            return redirect(reverse('index'))
     print('账号密码错误')
     return render(request, 'login.html', {'info': '账号或密码错误'})
 
 
 # main page
-@login_required
+# @login_required
 def index(request):
     return render(request, 'index2.html')
 
@@ -92,3 +91,7 @@ def show(request, page_index=1):
     data = data.page(page_index)
     print(data)
     return render(request, 'show_main.html', {'data': data, 'page_values': page_values, 'page_index': page_index})
+
+
+def add_data(request):
+    return render(request, 'add_data.html')
