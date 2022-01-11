@@ -8,6 +8,7 @@ import random
 from . import fun_package
 import logging
 import time
+import os
 
 
 # register windows
@@ -95,3 +96,14 @@ def show(request, page_index=1):
 
 def add_data(request):
     return render(request, 'add_data.html')
+
+
+def upload_file(request):
+    file = request.FILES.get('file1')
+    print('文件大小为：', file.size)
+    print('文件名：', file.name)
+    file_path = os.path.join('static', 'file', file.name)
+    with open(file_path, 'w') as f:
+        f.write(file.read().decode())
+
+    return render(request, 'add_data.html', {'msg': "上传成功"})

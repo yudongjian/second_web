@@ -28,5 +28,6 @@ urlpatterns = [
 
     path('show', views.show, name='show'),
     path('add_data', views.add_data, name='add_data'),
+    path('upload_file', views.upload_file, name='upload_file'),
     path('show/<int:page_index>', views.show, name='show'),
 ]
