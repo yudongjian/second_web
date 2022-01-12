@@ -5,7 +5,7 @@ $('#button123').on('click', function () {
             url: "/upload_file",
             type: "POST",
             success: function (result) {
-                var result_json = JSON.parse(result)
+                const result_json = JSON.parse(result);
                 if(result_json['flag']=='success'){
                     alert("upload file success")
                 }else {

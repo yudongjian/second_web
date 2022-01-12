@@ -112,3 +112,7 @@ def upload_file(request):
     # # return render(request, 'add_data.html', {'msg': "上传成功"})
     print('ajax上传了.....')
     return HttpResponse(json.dumps({'flag': 'success'}))
+
+
+def demo(request):
+    return render(request, 'demo.html')
