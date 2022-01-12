@@ -4,7 +4,8 @@ from django.core.paginator import Paginator
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-import random
+from django.shortcuts import HttpResponse
+import random,json
 from . import fun_package
 import logging
 import time
@@ -99,11 +100,15 @@ def add_data(request):
 
 
 def upload_file(request):
-    file = request.FILES.get('file1')
-    print('文件大小为：', file.size)
-    print('文件名：', file.name)
-    file_path = os.path.join('static', 'file', file.name)
-    with open(file_path, 'w') as f:
-        f.write(file.read().decode())
-
-    return render(request, 'add_data.html', {'msg': "上传成功"})
+    # file = request.FILES.get('file1')
+    # print('文件大小为：', file.size)
+    # print('文件名：', file.name)
+    # if file.size > 1024*1024*1204:
+    #     return render(request, 'add_data.html', {'msg': "文件太大"})
+    # file_path = os.path.join('static', 'file', file.name)
+    # with open(file_path, 'wb') as f:
+    #     f.write(file.read())
+    #
+    # # return render(request, 'add_data.html', {'msg': "上传成功"})
+    print('ajax上传了.....')
+    return HttpResponse(json.dumps({'flag': 'success'}))

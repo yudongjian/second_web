@@ -1,13 +1,15 @@
 {% extends 'index2.html' %}
 {% block block1%}
 
+
         <h2>{{ msg }}</h2>
       <form action="{% url 'upload_file' %}", method="post", enctype="multipart/form-data" style="width: 500px">
         {% csrf_token %}
       <div class="custom-file">
         <input type="file" value="选择文件" name="file1">
-        <input type="submit" value="提交">
+        <input type="button" id="button123"  value="提交" >
       </div>
       </form>
+        <progress id="uploadfile_progress", value="0", max="100">上传进度</progress>
 
 {% endblock %}
