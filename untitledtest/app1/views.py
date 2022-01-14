@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
 from app1 import models
 from django.core.paginator import Paginator
 from django.urls import reverse
@@ -19,7 +20,6 @@ def register(request):
 
 # deal with register
 def doregister(request):
-
     pwd = request.POST.get('pwd1')
     name = request.POST.get('username')
     salt = str(random.randint(111111, 999999))
@@ -49,13 +49,40 @@ def login(request):
 
 
 # deal with login
+# def dologin(request):
+#     name = request.POST.get('username')
+#     pwd = request.POST.get('password')
+#     print('name:', name)
+#     print('pwd:', pwd)
+#     try:
+#         user = models.User.objects.get(username=name)
+#     except Exception as err:
+#         print('账号密码错误')
+#         return redirect(reverse('login'))
+#     # if user exist.
+#     # input password comparison with database password
+#     if user:
+#         input_pwd = fun_package.get_self_md5(user.password_salt, pwd)
+#         print('input pwd:', pwd)
+#         print('ipput salt pwd:', input_pwd)
+#         print('user.password_hash:', user.password_hash)
+#         if input_pwd == user.password_hash:
+#             request.session['adminuser'] = user.nickname
+#             return redirect(reverse('index'))
+#     print('账号密码错误')
+#     return render(request, 'login.html', {'info': '账号或密码错误'})
+
+
 def dologin(request):
     name = request.POST.get('username')
     pwd = request.POST.get('password')
     print('name:', name)
     print('pwd:', pwd)
+    user = authenticate(username=name, password=pwd)
     try:
-        user = models.User.objects.get(username=name)
+        if user.is_active():
+            login(request, user)
+            return redirect(reverse('index'))
     except Exception as err:
         print('账号密码错误')
         return redirect(reverse('login'))
@@ -72,10 +99,10 @@ def dologin(request):
     print('账号密码错误')
     return render(request, 'login.html', {'info': '账号或密码错误'})
 
-
 # main page
-# @login_required
+@login_required
 def index(request):
+    print('这句话执行吗？？？')
     return render(request, 'index2.html')
 
 
