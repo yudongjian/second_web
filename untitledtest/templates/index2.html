@@ -177,8 +177,9 @@
           <img src="{% static '/index/dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"></a>
-          {{ request.session.adminuser }}
+
+          {{ request.user }}
+          <a href="{% url 'logout_view' %}" class="d-block">退出登录</a>
         </div>
       </div>
 

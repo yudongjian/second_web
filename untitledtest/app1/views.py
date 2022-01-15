@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponse
-import random,json
+import random, json
 from . import fun_package
 import logging
 import time
@@ -44,33 +44,13 @@ def doregister(request):
 
 
 # login windows
-def login(request):
+def login1(request):
     return render(request, 'login.html')
 
 
-# deal with login
-# def dologin(request):
-#     name = request.POST.get('username')
-#     pwd = request.POST.get('password')
-#     print('name:', name)
-#     print('pwd:', pwd)
-#     try:
-#         user = models.User.objects.get(username=name)
-#     except Exception as err:
-#         print('账号密码错误')
-#         return redirect(reverse('login'))
-#     # if user exist.
-#     # input password comparison with database password
-#     if user:
-#         input_pwd = fun_package.get_self_md5(user.password_salt, pwd)
-#         print('input pwd:', pwd)
-#         print('ipput salt pwd:', input_pwd)
-#         print('user.password_hash:', user.password_hash)
-#         if input_pwd == user.password_hash:
-#             request.session['adminuser'] = user.nickname
-#             return redirect(reverse('index'))
-#     print('账号密码错误')
-#     return render(request, 'login.html', {'info': '账号或密码错误'})
+def logout_view(request):
+    logout(request)
+    return render(request, 'login.html')
 
 
 def dologin(request):
@@ -78,34 +58,26 @@ def dologin(request):
     pwd = request.POST.get('password')
     print('name:', name)
     print('pwd:', pwd)
-    user = authenticate(username=name, password=pwd)
-    try:
-        if user.is_active():
-            login(request, user)
-            return redirect(reverse('index'))
-    except Exception as err:
+    user = authenticate(request, username=name, password=pwd)
+
+    if user is not None:
+        login(request, user)
+        return redirect(reverse('index'))
+
+    else:
         print('账号密码错误')
         return redirect(reverse('login'))
-    # if user exist.
-    # input password comparison with database password
-    if user:
-        input_pwd = fun_package.get_self_md5(user.password_salt, pwd)
-        print('input pwd:', pwd)
-        print('ipput salt pwd:', input_pwd)
-        print('user.password_hash:', user.password_hash)
-        if input_pwd == user.password_hash:
-            request.session['adminuser'] = user.nickname
-            return redirect(reverse('index'))
-    print('账号密码错误')
-    return render(request, 'login.html', {'info': '账号或密码错误'})
+
 
 # main page
 @login_required
 def index(request):
     print('这句话执行吗？？？')
+    print(request.user)
     return render(request, 'index2.html')
 
 
+@login_required
 def show(request, page_index=1):
     data = models.User.objects.filter()
     data = Paginator(data, 5)
@@ -122,10 +94,12 @@ def show(request, page_index=1):
     return render(request, 'show_main.html', {'data': data, 'page_values': page_values, 'page_index': page_index})
 
 
+@login_required
 def add_data(request):
     return render(request, 'add_data.html')
 
 
+@login_required
 def upload_file(request):
     # file = request.FILES.get('file1')
     # print('文件大小为：', file.size)

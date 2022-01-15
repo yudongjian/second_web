@@ -25,8 +25,9 @@ urlpatterns = [
     # index
     path('', views.index, name='index'),
     # login
-    path('login/', views.login, name='login'),
+    path('login/', views.login1, name='login'),
     path('dologin/', views.dologin, name='dologin'),
+    path('logout_view/', views.logout_view, name='logout_view'),
     # register
     path('register/', views.register, name='register'),
     path('doregister/', views.doregister, name='doregister'),
