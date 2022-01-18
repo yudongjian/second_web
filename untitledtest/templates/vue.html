@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src=".\..\static\vue\vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+<a v-bind:href="url">链接</a>
+<img style="width: 500px; height: 300px;" v-bind:src="imgUrl">
+</div>
+
+<script>
+
+var app =new Vue({
+el :"#app",
+data: {
+    url:"https://www.github.com",
+    imgUrl:".\\..\\static\\photo\\123.JPG"
+}
+})
+
+
+</script>
+
+
+</body>
+</html>
