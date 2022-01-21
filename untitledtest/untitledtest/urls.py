@@ -26,6 +26,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     # login
     path('login/', views.login1, name='login'),
+    path('login2/', views.login2, name='login2'),
     path('dologin/', views.dologin, name='dologin'),
     path('logout_view/', views.logout_view, name='logout_view'),
     # register

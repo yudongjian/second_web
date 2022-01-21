@@ -48,6 +48,11 @@ def login1(request):
     return render(request, 'login.html')
 
 
+# login windows vue
+def login2(request):
+    return render(request, 'login-vue.html')
+
+
 def logout_view(request):
     logout(request)
     return render(request, 'login.html')
