@@ -7,6 +7,7 @@
 
 <!--<link rel="stylesheet" type="text/css" href="login.css"/>-->
 <script src="./../static/vue/vue.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
 </head>
 <style>
     body {
@@ -111,14 +112,10 @@
     <form id="form1" method="post" action="{% url 'dologin' %}">
         {% csrf_token %}
         <p><label class="label_input">用户名</label><input type="text" v-model="name" class="text_field"/></p>
-        <p><label class="label_input">密码</label><input type="password" v-model="password" class="text_field"/></p>
+        <p><label class="label_input">密码</label><input type="password" v-model="pwd" class="text_field"/></p>
         <input type="text" style="width: 80px" name="code" 验证码>
         <br><br>
         <div id="login_control">
-            <input type="submit"  value="登录" />
-            <a href="{% url 'register' %}">注册</a>
-            <a id="forget_pwd" href="#">忘记密码？</a>
-
         </div>
 
     </form>
@@ -129,21 +126,22 @@
         data: {
             info: "欢迎",
             name: '',
-            password:'',
+            pwd:'',
         },
-        mounted () {
-            axios.post('/user', {
-             firstName: 'Fred',
-             lastName: 'Flintstone'
-            })
-            .then(function (response) {
-             console.log(response);
-            })
-            .catch(function (error) {
-             console.log(error);
-            });
-        }
+       mounted () {
+        axios.post('/dologin/', {
+            username: 'root',        // 参数 firstName
+            password: 'root',  // 参数 lastName
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
     })
+
 </script>
 </body>
 </html>

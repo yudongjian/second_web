@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="vue.js"></script>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <style>
+        #div{
+            width: 400px;
+            height: 500px;
+            position: absolute;
+            top: 200px;
+            left: 500px;
+            background-color: whitesmoke;
+
+        }
+        input{
+            position: absolute;
+            top: 50px;
+            left: 500px;
+            width: 400px;
+            height: 50px;
+
+        }
+    </style>
+</head>
+<body>
+<div id="app1">
+    <div id="div">
+        <li v-for="item in  dolist"> {{item}}</li>
+    </div>
+       <input type="text" v-model="dosth" @keyup.enter="submit">
+</div>
+</body>
+<script>
+let app1 = new Vue({
+    el: "#app1",
+    data:{
+        msg: 'xixi',
+        dosth:'',
+        dolist: [],
+    },
+    methods: {
+        submit(){
+            this.dolist.push(this.dosth)
+            this.dosth=''
+        }
+
+    }
+
+})
+        </script>
+</html>

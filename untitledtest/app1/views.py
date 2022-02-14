@@ -59,6 +59,8 @@ def logout_view(request):
 
 
 def dologin(request):
+    print('dologin 被调用了...')
+    print(request.POST)
     name = request.POST.get('username')
     pwd = request.POST.get('password')
     print('name:', name)
